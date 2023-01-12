@@ -53,4 +53,14 @@ public class Ingredient {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", count=" + count +
+                ", measureUnit='" + measureUnit + '\'' +
+                '}';
+    }
 }

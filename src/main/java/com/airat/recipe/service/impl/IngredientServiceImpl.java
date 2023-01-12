@@ -30,6 +30,30 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    public Ingredient editIngredient(int id, Ingredient ingredient) {
+        if ((ingredients.containsKey(id))) {
+            return ingredients.put(id, ingredient);
+        } else throw new RuntimeException("Не найден ингредиент по ID");
+    }
+
+    @Override
+    public Ingredient removeIngredient(int id) {
+        if (ingredients.containsKey(id)) {
+            return ingredients.remove(id);
+        } else throw new RuntimeException("Не найден ингредиент по ID");
+    }
+
+
+    @Override
+    public StringBuilder getAllIngredient() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, Ingredient> ingredientEntry : ingredients.entrySet()) {
+            builder.append(ingredientEntry.getKey().toString() + ingredientEntry.getValue().toString());
+        }
+        return builder;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -41,4 +65,6 @@ public class IngredientServiceImpl implements IngredientService {
     public int hashCode() {
         return Objects.hash(ingredients);
     }
+
+
 }

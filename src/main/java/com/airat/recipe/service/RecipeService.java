@@ -10,5 +10,11 @@ public interface RecipeService {
 
     Recipe getRecipe(int id);
 
+    Recipe editRecipe (int id, Recipe recipe);
+
+    Recipe removeRecipe (int id);
+
+    StringBuilder getAllRecipe ();
+
 
 }

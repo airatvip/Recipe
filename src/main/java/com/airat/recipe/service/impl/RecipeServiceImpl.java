@@ -32,6 +32,30 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public Recipe editRecipe(int id, Recipe recipe) {
+        if ((recipes.containsKey(id))) {
+            return recipes.put(id, recipe);
+        } else throw new RuntimeException("Не найден рецепт по ID");
+    }
+
+
+    @Override
+    public Recipe removeRecipe(int id) {
+        if (recipes.containsKey(id)) {
+            return recipes.remove(id);
+        } else throw new RuntimeException("Не найден рецепт по ID");
+    }
+
+    @Override
+    public StringBuilder getAllRecipe() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, Recipe> recipeEntry: recipes.entrySet()) {
+            builder.append(recipeEntry.getKey().toString() + recipeEntry.getValue().toString());
+        }
+        return builder;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

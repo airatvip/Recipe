@@ -76,4 +76,15 @@ public class Recipe {
     public void setStep(LinkedList steps) {
         this.steps = steps;
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cookingTime='" + cookingTime + '\'' +
+                ", ingredients=" + ingredients +
+                ", steps=" + steps +
+                '}';
+    }
 }

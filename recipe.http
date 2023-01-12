@@ -36,6 +36,7 @@ Content-Type: application/json
     "6: Повторяйте, пока творог не закончится."
   ]
 }
+
 ### добавление рецепта2
 POST http://localhost:8080/recipe/add
 Content-Type: application/json
@@ -102,12 +103,53 @@ POST http://localhost:8080/ingredients/add
 Content-Type: application/json
 
 {
-    "name": "Специи",
-      "count": 0,
-      "measureUnit": "по вкусу"
+  "name": "Специи",
+  "count": 0,
+  "measureUnit": "по вкусу"
 }
 
 ### Получение ингредиента по id
 GET http://localhost:8080/ingredients/1
 
+### Редактирование ингредиента по id
+PUT http://localhost:8080/ingredients/3
+Content-Type: application/json
 
+{
+  "name": "Специи",
+  "count": 0,
+  "measureUnit": "по цвету"
+}
+
+### Удаление ингредиента по id
+DELETE http://localhost:8080/ingredients/1
+
+### Получение всех ингредиентов
+GET http://localhost:8080/ingredients/all
+
+### Редактирование рецепта по id
+PUT http://localhost:8080/recipe/2
+Content-Type: application/json
+
+{
+  "name": "Салат из синей фасоли с творожным сыром, красным луком и сезонным салатом",
+  "cookingTime": "300 минут",
+  "ingredients": [
+    {
+      "name": "Оливковое масло",
+      "count": 50,
+      "measureUnit": "1"
+    }
+  ],
+  "steps": [
+    "1: Открыть две банки красной фасоли в собственном соку, слить сок и промыть фасоль холодной водой.",
+    "2: Готовую фасоль смешать с мелко нарубленным красным луком, зеленью, давленым чесноком, оливковым маслом, лимонным соком и творожным сыром.",
+    "3: Посолить, поперчить, дать продуктам две минуты притереться друг к другу и подавать к столу."
+  ]
+}
+
+### Удаление рецепта по id
+DELETE http://localhost:8080/recipe/1
+
+### Получение всех рецептов
+GET http://localhost:8080/recipe/all
