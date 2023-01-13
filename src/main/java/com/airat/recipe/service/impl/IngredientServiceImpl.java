@@ -3,12 +3,12 @@ package com.airat.recipe.service.impl;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Ingredient;
 import com.airat.recipe.service.IngredientService;
+import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
-
+@EqualsAndHashCode
 @Service
 public class IngredientServiceImpl implements IngredientService {
 
@@ -54,18 +54,6 @@ public class IngredientServiceImpl implements IngredientService {
         return builder;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IngredientServiceImpl that = (IngredientServiceImpl) o;
-        return Objects.equals(ingredients, that.ingredients);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ingredients);
-    }
 
 
 }

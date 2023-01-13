@@ -3,19 +3,19 @@ package com.airat.recipe.service.impl;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Recipe;
 import com.airat.recipe.service.RecipeService;
+import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
+@EqualsAndHashCode
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
     Map<Integer, Recipe> recipes = new HashMap<>();
 
     @Override
-    public Recipe addRecipe(Recipe recipe) throws IncorrectInputException {
+    public Recipe addRecipe(Recipe recipe) {
         if (recipes.containsKey(recipe.getId())) {
             throw new IncorrectInputException("Такой рецепт уже есть");
         } else {
@@ -56,16 +56,4 @@ public class RecipeServiceImpl implements RecipeService {
         return builder;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RecipeServiceImpl that = (RecipeServiceImpl) o;
-        return Objects.equals(recipes, that.recipes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(recipes);
-    }
 }

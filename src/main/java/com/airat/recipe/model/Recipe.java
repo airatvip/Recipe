@@ -1,7 +1,12 @@
 package com.airat.recipe.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.LinkedList;
 
+@Getter
+@ToString
 
 public class Recipe {
 
@@ -20,25 +25,16 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public static int getCount() {
-        return count;
-    }
 
     public static void setCount(int count) {
         Recipe.count = count;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         if (name == null || name.isEmpty() || name.isBlank()) {
@@ -47,20 +43,14 @@ public class Recipe {
             this.name = name;
     }
 
-    public String getCookingTime() {
-        return cookingTime;
-    }
 
     public void setCookingTime(String cookingTime) {
-        if (cookingTime==null || cookingTime.isEmpty() || cookingTime.isBlank()) {
+        if (cookingTime == null || cookingTime.isEmpty() || cookingTime.isBlank()) {
             throw new IncorrectInputException("Заполните поле \"Время приготовления\"");
         }
-            this.cookingTime = cookingTime;
+        this.cookingTime = cookingTime;
     }
 
-    public LinkedList getIngredients() {
-        return ingredients;
-    }
 
     public void setIngredients(LinkedList ingredients) {
         if (ingredients == null) {
@@ -77,14 +67,4 @@ public class Recipe {
         this.steps = steps;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cookingTime='" + cookingTime + '\'' +
-                ", ingredients=" + ingredients +
-                ", steps=" + steps +
-                '}';
-    }
 }
