@@ -2,15 +2,15 @@ package com.airat.recipe.controllers;
 
 
 import com.airat.recipe.model.Ingredient;
-import com.airat.recipe.service.impl.IngredientServiceImpl;
+import com.airat.recipe.service.IngredientService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
-    private final IngredientServiceImpl ingredientService;
+    private final IngredientService ingredientService;
 
-    public IngredientController(IngredientServiceImpl ingredientService) {
+    public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
 

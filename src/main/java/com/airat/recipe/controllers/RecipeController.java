@@ -1,17 +1,17 @@
 package com.airat.recipe.controllers;
 
 import com.airat.recipe.model.Recipe;
-import com.airat.recipe.service.impl.RecipeServiceImpl;
+import com.airat.recipe.service.RecipeService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/recipe")
 public class RecipeController {
 
-    private final RecipeServiceImpl recipeService;
+    private final RecipeService recipeService;
 
 
-    public RecipeController(RecipeServiceImpl recipeService) {
+    public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
