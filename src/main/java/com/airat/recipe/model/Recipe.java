@@ -42,7 +42,7 @@ public class Recipe {
 
     public void setName(String name) {
         if (name == null || name.isEmpty() || name.isBlank()) {
-            throw new RuntimeException("Название рецепта не может быть пустым. Заполните поле");
+            throw new IncorrectInputException("Название рецепта не может быть пустым. Заполните поле");
         } else
             this.name = name;
     }
@@ -53,7 +53,7 @@ public class Recipe {
 
     public void setCookingTime(String cookingTime) {
         if (cookingTime==null || cookingTime.isEmpty() || cookingTime.isBlank()) {
-            throw new RuntimeException("Заполните поле \"Время приготовления\"");
+            throw new IncorrectInputException("Заполните поле \"Время приготовления\"");
         }
             this.cookingTime = cookingTime;
     }
@@ -64,7 +64,7 @@ public class Recipe {
 
     public void setIngredients(LinkedList ingredients) {
         if (ingredients == null) {
-            throw new RuntimeException("Заполните ингредиенты");
+            throw new IncorrectInputException("Заполните ингредиенты");
         }
         this.ingredients = ingredients;
     }

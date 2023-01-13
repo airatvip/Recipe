@@ -9,7 +9,7 @@ public class Ingredient {
 
 
 
-    public Ingredient(String name, double count, String measureUnit) throws IncorrectInputException {
+    public Ingredient(String name, double count, String measureUnit) {
         this.id = counter++;
         setName(name);
         this.count = count;
@@ -20,7 +20,7 @@ public class Ingredient {
         return name;
     }
 
-    public void setName(String name) throws IncorrectInputException {
+    public void setName(String name) {
         if (name == null || name.isEmpty() || name.isBlank()) {
             throw new IncorrectInputException("Название ингредиентв не может быть пустым. Заполните поле");
         } else
@@ -39,7 +39,7 @@ public class Ingredient {
         return measureUnit;
     }
 
-    public void setMeasureUnit(String measureUnit) throws IncorrectInputException {
+    public void setMeasureUnit(String measureUnit) {
         if (measureUnit==null || measureUnit.isEmpty() || measureUnit.isBlank()) {
             throw new IncorrectInputException("Заполните поле единицы измерения");
         }
