@@ -2,17 +2,34 @@ package com.airat.recipe.service.impl;
 
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Recipe;
+import com.airat.recipe.service.RecipeFileService;
 import com.airat.recipe.service.RecipeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
+
 @EqualsAndHashCode
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    Map<Integer, Recipe> recipes = new HashMap<>();
+    HashMap<Integer, Recipe> recipes = new HashMap<>();
+    private final RecipeFileService recipeFileService;
+
+    public RecipeServiceImpl(RecipeFileService recipeFileService) {
+        this.recipeFileService = recipeFileService;
+    }
+
+
+    @PostConstruct
+    private void init() {
+        readFromFile();
+    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
@@ -20,6 +37,7 @@ public class RecipeServiceImpl implements RecipeService {
             throw new IncorrectInputException("Такой рецепт уже есть");
         } else {
             recipes.put(recipe.getId(), recipe);
+            saveFile();
         }
         return recipe;
 
@@ -35,6 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe editRecipe(int id, Recipe recipe) {
         if ((recipes.containsKey(id))) {
+            readFromFile();
             return recipes.put(id, recipe);
         } else throw new IncorrectInputException("Не найден рецепт по ID");
     }
@@ -54,6 +73,26 @@ public class RecipeServiceImpl implements RecipeService {
             builder.append(recipeEntry.getKey().toString() + recipeEntry.getValue().toString());
         }
         return builder;
+    }
+
+    private void saveFile() {
+        try {
+            String json = new ObjectMapper().writeValueAsString(recipes);
+            recipeFileService.saveToFile(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void readFromFile() {
+        String json = recipeFileService.readFile();
+        try {
+            recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
+                    }
+            );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

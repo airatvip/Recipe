@@ -1,10 +1,12 @@
 package com.airat.recipe.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
+@NoArgsConstructor
 public class Ingredient {
     private int id;
     private static int counter = 1;

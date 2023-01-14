@@ -27,7 +27,7 @@ description = "Введите номер id рецепта чтобы получ
             summary = "Добавить новый рецепт",
             description = "Введите новый рецепт в формате JSON"
     )
-    @PostMapping("/add")
+    @PostMapping()
     public Recipe addRecipe (@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
@@ -50,7 +50,7 @@ description = "Введите номер id рецепта чтобы получ
     @Operation(
             summary = "Получение всех рецептов"
     )
-    @GetMapping("/all")
+    @GetMapping()
     public StringBuilder getAllRecipe () {
         return recipeService.getAllRecipe();
     }

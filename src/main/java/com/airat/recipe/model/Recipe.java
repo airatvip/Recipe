@@ -1,12 +1,14 @@
 package com.airat.recipe.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.LinkedList;
 
 @Getter
 @ToString
+@NoArgsConstructor
 
 public class Recipe {
 

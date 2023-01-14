@@ -28,7 +28,7 @@ public class IngredientController {
             summary = "Добавить новый ингредиент",
             description = "Введите новый ингредиент в формате JSON"
     )
-    @PostMapping("/add")
+    @PostMapping()
     public Ingredient addIngredients(@RequestBody Ingredient ingredient) {
         return ingredientService.addIngredient(ingredient);
     }
@@ -51,7 +51,7 @@ public class IngredientController {
     @Operation(
             summary = "Получение всех ингредиентов"
         )
-    @GetMapping("/all")
+    @GetMapping()
     public StringBuilder getAllIngredients() {
         return ingredientService.getAllIngredient();
     }
