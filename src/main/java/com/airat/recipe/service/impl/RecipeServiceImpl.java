@@ -1,5 +1,7 @@
 package com.airat.recipe.service.impl;
 
+import com.airat.recipe.model.FileReadErrorException;
+import com.airat.recipe.model.FileSaveErrorException;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Recipe;
 import com.airat.recipe.service.RecipeFileService;
@@ -53,7 +55,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe editRecipe(int id, Recipe recipe) {
         if ((recipes.containsKey(id))) {
-            readFromFile();
+            saveFile();
             return recipes.put(id, recipe);
         } else throw new IncorrectInputException("Не найден рецепт по ID");
     }
@@ -80,7 +82,7 @@ public class RecipeServiceImpl implements RecipeService {
             String json = new ObjectMapper().writeValueAsString(recipes);
             recipeFileService.saveToFile(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new FileSaveErrorException("Не удалось сохранить файл");
         }
     }
 
@@ -91,7 +93,7 @@ public class RecipeServiceImpl implements RecipeService {
                     }
             );
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new FileReadErrorException("Файл не найден");
         }
     }
 

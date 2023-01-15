@@ -1,5 +1,7 @@
 package com.airat.recipe.service.impl;
 
+import com.airat.recipe.model.FileReadErrorException;
+import com.airat.recipe.model.FileSaveErrorException;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Ingredient;
 import com.airat.recipe.service.IngredientFileService;
@@ -31,6 +33,7 @@ public class IngredientServiceImpl implements IngredientService {
     private void init() {
         readFromFile();
     }
+
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
         if (ingredients.containsKey(ingredient.getId())) {
@@ -43,7 +46,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient getIngredient(int id) {
         if (ingredients.containsKey(id)) {
-            saveFile();
             return ingredients.get(id);
         } else throw new IncorrectInputException("Нет таких ингредиентов");
     }
@@ -51,6 +53,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient editIngredient(int id, Ingredient ingredient) {
         if ((ingredients.containsKey(id))) {
+            saveFile();
             return ingredients.put(id, ingredient);
         } else throw new IncorrectInputException("Не найден ингредиент по ID");
     }
@@ -77,7 +80,7 @@ public class IngredientServiceImpl implements IngredientService {
             String json = new ObjectMapper().writeValueAsString(ingredients);
             ingredientfileService.saveToFile(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new FileSaveErrorException("Не удалось сохранить файл");
         }
     }
 
@@ -88,7 +91,7 @@ public class IngredientServiceImpl implements IngredientService {
                     }
             );
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new FileReadErrorException("Файл не найден");
         }
     }
 
