@@ -80,6 +80,7 @@ public class IngredientServiceImpl implements IngredientService {
             String json = new ObjectMapper().writeValueAsString(ingredients);
             ingredientfileService.saveToFile(json);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             throw new FileSaveErrorException("Не удалось сохранить файл");
         }
     }
@@ -91,6 +92,7 @@ public class IngredientServiceImpl implements IngredientService {
                     }
             );
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             throw new FileReadErrorException("Файл не найден");
         }
     }

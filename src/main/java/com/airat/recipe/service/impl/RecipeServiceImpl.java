@@ -82,6 +82,7 @@ public class RecipeServiceImpl implements RecipeService {
             String json = new ObjectMapper().writeValueAsString(recipes);
             recipeFileService.saveToFile(json);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             throw new FileSaveErrorException("Не удалось сохранить файл");
         }
     }
@@ -93,6 +94,7 @@ public class RecipeServiceImpl implements RecipeService {
                     }
             );
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             throw new FileReadErrorException("Файл не найден");
         }
     }
