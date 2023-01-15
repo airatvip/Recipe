@@ -1,5 +1,6 @@
 package com.airat.recipe.service.impl;
 
+import com.airat.recipe.model.FileReadErrorException;
 import com.airat.recipe.service.RecipeFileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,8 @@ public class RecipeFeliServiceImpl implements RecipeFileService {
             return Files.readString(Path.of(dataFilePath, nameDataFile));
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new FileReadErrorException("Ошибка при чтении файла");
         }
 
     }
