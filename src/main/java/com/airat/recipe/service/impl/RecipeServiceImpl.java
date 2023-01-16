@@ -4,7 +4,7 @@ import com.airat.recipe.model.FileReadErrorException;
 import com.airat.recipe.model.FileSaveErrorException;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Recipe;
-import com.airat.recipe.service.RecipeFileService;
+import com.airat.recipe.service.FileServiceRecipe;
 import com.airat.recipe.service.RecipeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,9 +21,9 @@ import java.util.Map;
 public class RecipeServiceImpl implements RecipeService {
 
     HashMap<Integer, Recipe> recipes = new HashMap<>();
-    private final RecipeFileService recipeFileService;
+    private final FileServiceRecipe recipeFileService;
 
-    public RecipeServiceImpl(RecipeFileService recipeFileService) {
+    public RecipeServiceImpl(FileServiceRecipe recipeFileService) {
         this.recipeFileService = recipeFileService;
     }
 

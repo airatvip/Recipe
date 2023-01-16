@@ -1,24 +1,26 @@
 package com.airat.recipe.service.impl;
 
 import com.airat.recipe.model.FileReadErrorException;
-import com.airat.recipe.service.RecipeFileService;
+import com.airat.recipe.service.FileServiceIngredient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-public class RecipeFeliServiceImpl implements RecipeFileService {
+public class FileServiceIngredientImpl implements FileServiceIngredient {
     @Value("${path.to.data.files}")
     private String dataFilePath;
-    @Value("${nameRecipe.of.data.files}")
+    @Value("${nameIngredient.of.data.files}")
     private String nameDataFile;
 
     @Override
     public boolean saveToFile(String json) {
         try {
+            cleanDataFile();
             Files.writeString(Path.of(dataFilePath, nameDataFile), json);
             return true;
         } catch (IOException e) {
@@ -51,6 +53,9 @@ public class RecipeFeliServiceImpl implements RecipeFileService {
         }
         return false;
     }
-
+    @Override
+    public File getDataFile() {
+        return new File(dataFilePath + "/" + nameDataFile);
+    }
 
 }

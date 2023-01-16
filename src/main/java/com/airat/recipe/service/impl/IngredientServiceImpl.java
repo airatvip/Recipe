@@ -4,7 +4,7 @@ import com.airat.recipe.model.FileReadErrorException;
 import com.airat.recipe.model.FileSaveErrorException;
 import com.airat.recipe.model.IncorrectInputException;
 import com.airat.recipe.model.Ingredient;
-import com.airat.recipe.service.IngredientFileService;
+import com.airat.recipe.service.FileServiceIngredient;
 import com.airat.recipe.service.IngredientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,11 +20,11 @@ import java.util.TreeMap;
 @Service
 public class IngredientServiceImpl implements IngredientService {
 
-    private final IngredientFileService ingredientfileService;
+    private final FileServiceIngredient ingredientfileService;
 
     TreeMap<Integer, Ingredient> ingredients = new TreeMap<>();
 
-    public IngredientServiceImpl(IngredientFileService ingredientfileService) {
+    public IngredientServiceImpl(FileServiceIngredient ingredientfileService) {
         this.ingredientfileService = ingredientfileService;
     }
 

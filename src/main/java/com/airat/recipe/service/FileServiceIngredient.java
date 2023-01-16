@@ -1,9 +1,14 @@
 package com.airat.recipe.service;
 
-public interface IngredientFileService {
+import java.io.File;
+
+public interface FileServiceIngredient {
     boolean saveToFile(String json);
 
     String readFile();
 
     boolean cleanDataFile();
+
+    File getDataFile();
+
 }
