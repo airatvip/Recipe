@@ -1,0 +1,71 @@
+package com.airat.recipe.service.impl;
+
+import com.airat.recipe.model.FileReadErrorException;
+import com.airat.recipe.model.FileSaveErrorException;
+import com.airat.recipe.service.FileServiceRecipe;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@Service
+public class FileServiceRecipeImpl implements FileServiceRecipe {
+    @Value("${path.to.data.files}")
+    private String dataFilePath;
+    @Value("${nameRecipe.of.data.files}")
+    private String nameDataFile;
+
+    @Override
+    public boolean saveToFile(String json) {
+        try {
+            Files.writeString(Path.of(dataFilePath, nameDataFile), json);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public String readFile() {
+        try {
+            return Files.readString(Path.of(dataFilePath, nameDataFile));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new FileReadErrorException("Ошибка при чтении файла");
+        }
+
+    }
+
+    @Override
+    public boolean cleanDataFile() {
+        Path path = Path.of(dataFilePath, nameDataFile);
+        try {
+            Files.delete(path);
+            Files.createFile(path);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public File getDataFile() {
+        return new File(dataFilePath + "/" + nameDataFile);
+    }
+    @Override
+    public Path creatTempFile (String suffix) {
+        try {
+            return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new FileSaveErrorException("Ошибка при создании временного файла");
+        }
+
+    }
+
+}
