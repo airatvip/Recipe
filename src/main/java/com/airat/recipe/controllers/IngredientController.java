@@ -16,6 +16,7 @@ public class IngredientController {
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
+
     @Operation(
             summary = "Получить ингредиент по id",
             description = "Введите номер id ингредиента чтобы получить его"
@@ -24,6 +25,7 @@ public class IngredientController {
     public Ingredient getIngredients(@PathVariable int id) {
         return ingredientService.getIngredient(id);
     }
+
     @Operation(
             summary = "Добавить новый ингредиент",
             description = "Введите новый ингредиент в формате JSON"
@@ -32,6 +34,7 @@ public class IngredientController {
     public Ingredient addIngredients(@RequestBody Ingredient ingredient) {
         return ingredientService.addIngredient(ingredient);
     }
+
     @Operation(
             summary = "Редактировать ингредиент по id",
             description = "Введите id ингредиента и отредактированный ингредиент в формате JSON"
@@ -40,6 +43,7 @@ public class IngredientController {
     public Ingredient editIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
         return ingredientService.editIngredient(id, ingredient);
     }
+
     @Operation(
             summary = "Удаление ингредиента по id",
             description = "Введите id ингредиента для удаления"
@@ -48,9 +52,10 @@ public class IngredientController {
     public Ingredient removeIngredient(@PathVariable int id) {
         return ingredientService.removeIngredient(id);
     }
+
     @Operation(
             summary = "Получение всех ингредиентов"
-        )
+    )
     @GetMapping()
     public StringBuilder getAllIngredients() {
         return ingredientService.getAllIngredient();

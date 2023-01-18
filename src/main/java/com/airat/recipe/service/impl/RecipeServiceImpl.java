@@ -13,14 +13,19 @@ import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
+import java.util.TreeMap;
 
 @EqualsAndHashCode
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    HashMap<Integer, Recipe> recipes = new HashMap<>();
+    TreeMap<Integer, Recipe> recipes = new TreeMap<>();
     private final FileServiceRecipe recipeFileService;
 
     public RecipeServiceImpl(FileServiceRecipe recipeFileService) {
@@ -90,7 +95,7 @@ public class RecipeServiceImpl implements RecipeService {
     private void readFromFile() {
         String json = recipeFileService.readFile();
         try {
-            recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
+            recipes = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Recipe>>() {
                     }
             );
         } catch (JsonProcessingException e) {
@@ -98,5 +103,29 @@ public class RecipeServiceImpl implements RecipeService {
             throw new FileReadErrorException("Файл не найден");
         }
     }
+
+    @Override
+    public Path createFormatFile() {
+        Path path = recipeFileService.creatTempFile("recipes");
+        for (Recipe recipe : recipes.values()) {
+            try (
+                Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND))
+                {
+                    writer.append("Название рецепта: " + recipe.getName() + '\n' + '\n' +
+                            "Время приготовления: " + recipe.getCookingTime() + '\n' + '\n' +
+                            "Ингредиенты: " + '\n' + '\n'+ recipe.ingredientsBuilder() + '\n' +
+                            "Инструкция приготовления: " + '\n' + '\n' + recipe.stepsBuilder() + '\n');
+                    writer.append('\n');
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new FileSaveErrorException("Ошибка создания файла по формату");
+            }
+
+        }
+        return path;
+
+    }
+
 
 }

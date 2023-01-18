@@ -1,6 +1,7 @@
 package com.airat.recipe.service.impl;
 
 import com.airat.recipe.model.FileReadErrorException;
+import com.airat.recipe.model.FileSaveErrorException;
 import com.airat.recipe.service.FileServiceRecipe;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,14 @@ public class FileServiceRecipeImpl implements FileServiceRecipe {
     public File getDataFile() {
         return new File(dataFilePath + "/" + nameDataFile);
     }
+    @Override
+    public Path creatTempFile (String suffix) {
+        try {
+            return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new FileSaveErrorException("Ошибка при создании временного файла");
+        }
 
+    }
 
 }

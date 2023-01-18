@@ -17,41 +17,46 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
-@Operation (summary = "Получение рецепта по id",
-description = "Введите номер id рецепта чтобы получить его")
+
+    @Operation(summary = "Получение рецепта по id",
+            description = "Введите номер id рецепта чтобы получить его")
     @GetMapping("/{id}")
     public Recipe getRecipe(@PathVariable int id) {
         return recipeService.getRecipe(id);
     }
+
     @Operation(
             summary = "Добавить новый рецепт",
             description = "Введите новый рецепт в формате JSON"
     )
     @PostMapping()
-    public Recipe addRecipe (@RequestBody Recipe recipe) {
+    public Recipe addRecipe(@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
+
     @Operation(
             summary = "Редактировать рецепт по id",
             description = "Введите id рецепта и отредактированный рецепт в формате JSON"
     )
     @PutMapping("/{id}")
-    public Recipe editRecipe (@PathVariable int id, @RequestBody Recipe recipe) {
+    public Recipe editRecipe(@PathVariable int id, @RequestBody Recipe recipe) {
         return recipeService.editRecipe(id, recipe);
     }
+
     @Operation(
             summary = "Удаление рецепта по id",
             description = "Введите id рецепта для удаления"
     )
     @DeleteMapping("/{id}")
-    public Recipe removeRecipe (@PathVariable int id) {
+    public Recipe removeRecipe(@PathVariable int id) {
         return recipeService.removeRecipe(id);
     }
+
     @Operation(
             summary = "Получение всех рецептов"
     )
     @GetMapping()
-    public StringBuilder getAllRecipe () {
+    public StringBuilder getAllRecipe() {
         return recipeService.getAllRecipe();
     }
 

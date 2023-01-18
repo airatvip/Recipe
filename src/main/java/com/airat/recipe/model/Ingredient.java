@@ -2,10 +2,8 @@ package com.airat.recipe.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Getter
-@ToString
 @NoArgsConstructor
 public class Ingredient {
     private int id;
@@ -46,4 +44,9 @@ public class Ingredient {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return name + " - " + count + " " + measureUnit;
+
+    }
 }

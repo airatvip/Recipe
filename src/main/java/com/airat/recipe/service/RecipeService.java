@@ -3,6 +3,8 @@ package com.airat.recipe.service;
 import com.airat.recipe.model.Recipe;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+
 @Service
 public interface RecipeService {
 
@@ -17,4 +19,5 @@ public interface RecipeService {
     StringBuilder getAllRecipe ();
 
 
+    Path createFormatFile();
 }

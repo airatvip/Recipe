@@ -20,12 +20,12 @@ import java.util.TreeMap;
 @Service
 public class IngredientServiceImpl implements IngredientService {
 
-    private final FileServiceIngredient ingredientfileService;
+    private final FileServiceIngredient ingredientFileService;
 
     TreeMap<Integer, Ingredient> ingredients = new TreeMap<>();
 
-    public IngredientServiceImpl(FileServiceIngredient ingredientfileService) {
-        this.ingredientfileService = ingredientfileService;
+    public IngredientServiceImpl(FileServiceIngredient ingredientFileService) {
+        this.ingredientFileService = ingredientFileService;
     }
 
 
@@ -78,7 +78,7 @@ public class IngredientServiceImpl implements IngredientService {
     private void saveFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(ingredients);
-            ingredientfileService.saveToFile(json);
+            ingredientFileService.saveToFile(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new FileSaveErrorException("Не удалось сохранить файл");
@@ -86,7 +86,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     private void readFromFile() {
-        String json = ingredientfileService.readFile();
+        String json = ingredientFileService.readFile();
         try {
             ingredients = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Integer, Ingredient>>() {
                     }
@@ -96,6 +96,7 @@ public class IngredientServiceImpl implements IngredientService {
             throw new FileReadErrorException("Файл не найден");
         }
     }
+
 
 
 }

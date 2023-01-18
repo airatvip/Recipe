@@ -1,6 +1,7 @@
 package com.airat.recipe.service;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public interface FileServiceRecipe {
     boolean saveToFile(String json);
@@ -10,4 +11,6 @@ public interface FileServiceRecipe {
     boolean cleanDataFile();
 
     File getDataFile();
+
+    Path creatTempFile(String suffix);
 }

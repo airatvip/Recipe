@@ -33,9 +33,9 @@ public class FileIngredientController {
         if (file.exists()) {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
             return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .contentType(MediaType.TEXT_PLAIN)
                     .contentLength(file.length())
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Ingredients.json\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Ingredients.txt\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();

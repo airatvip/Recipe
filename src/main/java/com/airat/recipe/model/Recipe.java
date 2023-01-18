@@ -2,12 +2,10 @@ package com.airat.recipe.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.LinkedList;
 
 @Getter
-@ToString
 @NoArgsConstructor
 
 public class Recipe {
@@ -16,8 +14,8 @@ public class Recipe {
     private int id;
     private String name;
     private String cookingTime;
-    private LinkedList ingredients;
-    private LinkedList steps;
+    private LinkedList<Ingredient> ingredients;
+    private LinkedList<String> steps;
 
     public Recipe(String name, String cookingTime, LinkedList ingredients, LinkedList steps) {
         this.id = count++;
@@ -61,12 +59,30 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public LinkedList getSteps() {
-        return steps;
-    }
 
     public void setStep(LinkedList steps) {
         this.steps = steps;
     }
 
+
+    public StringBuilder ingredientsBuilder() {
+        StringBuilder ingredientString = new StringBuilder();
+        for (int i = 0; i < ingredients.size(); i++) {
+            ingredientString.append(ingredients.get(i).getName());
+
+        }
+        return ingredientString;
+
+
+    }
+
+    public StringBuilder stepsBuilder() {
+        StringBuilder stepString = new StringBuilder();
+        for (Object step : steps) {
+            stepString.append(step + "\n");
+        }
+        return stepString;
+
+
+    }
 }
