@@ -1,11 +1,11 @@
 package com.airat.recipe.model;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.LinkedList;
 
-@Getter
+@Data
 @NoArgsConstructor
 
 public class Recipe {
@@ -60,19 +60,41 @@ public class Recipe {
     }
 
 
-    public void setStep(LinkedList steps) {
-        this.steps = steps;
-    }
-
+//    public void setStep(LinkedList steps) {
+//        this.steps = steps;
+//    }
+//
+//    public static int getCount() {
+//        return count;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public String getCookingTime() {
+//        return cookingTime;
+//    }
+//
+//    public LinkedList<Ingredient> getIngredients() {
+//        return ingredients;
+//    }
+//
+//    public LinkedList<String> getSteps() {
+//        return steps;
+//    }
 
     public StringBuilder ingredientsBuilder() {
         StringBuilder ingredientString = new StringBuilder();
-        for (int i = 0; i < ingredients.size(); i++) {
+        for (int i = 0; i < getIngredients().size(); i++) {
             ingredientString.append(ingredients.get(i).getName());
 
         }
         return ingredientString;
-
 
     }
 

@@ -1,9 +1,9 @@
 package com.airat.recipe.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Getter
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
 @NoArgsConstructor
 public class Ingredient {
     private int id;
@@ -28,9 +28,9 @@ public class Ingredient {
     }
 
 
-    public void setCount(double count) {
-        this.count = count;
-    }
+//    public void setCount(double count) {
+//        this.count = count;
+//    }
 
 
     public void setMeasureUnit(String measureUnit) {
@@ -40,9 +40,29 @@ public class Ingredient {
         this.measureUnit = measureUnit;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public static int getCounter() {
+//        return counter;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public double getCount() {
+//        return count;
+//    }
+//
+//    public String getMeasureUnit() {
+//        return measureUnit;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
 
     @Override
     public String toString() {

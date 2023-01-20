@@ -29,19 +29,24 @@ public class FileIngredientController {
             summary = "Скачивание ингредиентов"
     )
     public ResponseEntity<InputStreamResource> downloadDataFile() throws FileNotFoundException {
-        File file = fileServiceIngredient.getDataFile();
-        if (file.exists()) {
+        try {
+            File file = fileServiceIngredient.getDataFile();
+            if (file.exists() == false) {
+                return ResponseEntity.noContent().build();
+            }
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
             return ResponseEntity.ok()
                     .contentType(MediaType.TEXT_PLAIN)
                     .contentLength(file.length())
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Ingredients.txt\"")
                     .body(resource);
-        } else {
-            return ResponseEntity.noContent().build();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+        return ResponseEntity.internalServerError().build();
     }
+
+
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
             summary = "Загрузка ингредиентов"
